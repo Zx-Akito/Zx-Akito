@@ -67,7 +67,7 @@
 				//Jika passwordnya salah
 				echo '
 				<script>
-					alert("Password Salah");
+					alert("Password Yang Anda Masukan Salah");
 					window.location.href="index.php";
 				</script>
 				';
