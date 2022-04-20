@@ -5,7 +5,7 @@
 <p>&nbsp;<img align="left" src="https://github-readme-stats.vercel.app/api?username=zx-akito&show_icons=true&locale=en" alt="zx-akito" /></p>
 
 <p><img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=zx-akito&show_icons=true&locale=en&layout=compact" alt="zx-akito" /></p>
-
+<br>
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://fb.com/rifki nurmansyah new jr" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="rifki nurmansyah new jr" height="30" width="40" /></a>
