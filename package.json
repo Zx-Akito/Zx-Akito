@@ -1,0 +1,23 @@
+{
+  "name": "zx-akito",
+  "version": "1.0.0",
+  "description": "Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zx-Akito/Zx-Akito.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zx-Akito/Zx-Akito/issues"
+  },
+  "homepage": "https://github.com/Zx-Akito/Zx-Akito#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
