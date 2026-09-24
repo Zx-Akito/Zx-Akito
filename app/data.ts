@@ -44,7 +44,7 @@ export const projects = [
     category: "Web app & PWA",
     desc: "Cross-platform anime streaming app with authentication, real-time data, and push notifications.",
     tags: ["Next.js", "Zustand", "Convex", "FCM"],
-    image: "/stucknime.png",
+    image: "/stucknime-v2.png",
     bg: "/projects/bg-2.webp",
     href: "https://stucknime.my.id",
   },
