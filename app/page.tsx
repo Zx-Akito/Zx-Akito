@@ -64,12 +64,7 @@ function Nav() {
             height={44}
             className="size-11 rounded-full object-cover"
           />
-          <span className="leading-tight">
-            <span className="block font-medium tracking-tight">
-              {profile.name}
-            </span>
-            <span className="block text-sm text-muted">{profile.role}</span>
-          </span>
+          <span className="font-medium tracking-tight">{profile.name}</span>
         </a>
         <div className="flex items-center gap-7">
           {nav.map(([label, href]) => (

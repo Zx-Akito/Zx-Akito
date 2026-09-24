@@ -104,3 +104,36 @@ a:has(img) {
     transform: translateX(-50%);
   }
 }
+
+/* Contact popup: circle grows from the clicked button to full screen. */
+@media (prefers-reduced-motion: no-preference) {
+  .circle-in {
+    animation: circle-in 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+
+  .circle-out {
+    animation: circle-out 0.5s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+}
+
+@keyframes circle-in {
+  from {
+    clip-path: circle(0 at var(--x) var(--y));
+  }
+  to {
+    clip-path: circle(150vmax at var(--x) var(--y));
+  }
+}
+
+@keyframes circle-out {
+  from {
+    clip-path: circle(150vmax at var(--x) var(--y));
+  }
+  to {
+    clip-path: circle(0 at var(--x) var(--y));
+  }
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}

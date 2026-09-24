@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CaretDownIcon, CheckIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon, CaretDownIcon, CheckIcon, XIcon } from "@phosphor-icons/react";
 import { profile } from "./data";
 
 const TYPES = [
@@ -24,6 +24,39 @@ const input =
 export function ContactForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState(TYPES[0]);
+  const [origin, setOrigin] = useState({ x: 0, y: 0 });
+  const dialog = useRef<HTMLDialogElement>(null);
+
+  // Circle grows from the clicked button. Keyboard clicks have no pointer coords, so fall back to the button center.
+  function start(t: string, e: React.MouseEvent<HTMLButtonElement>) {
+    const r = e.currentTarget.getBoundingClientRect();
+    setOrigin({
+      x: e.clientX || r.left + r.width / 2,
+      y: e.clientY || r.top + r.height / 2,
+    });
+    setType(t);
+    setErrors({});
+    setSent(false);
+    setOpen(true);
+  }
+
+  useEffect(() => {
+    if (!open) return;
+    dialog.current?.showModal();
+    dialog.current?.querySelector("input")?.focus();
+  }, [open]);
+
+  // Play the shrink animation first; none runs under reduced motion, so it closes at once.
+  async function close() {
+    const d = dialog.current;
+    if (!d) return;
+    d.classList.replace("circle-in", "circle-out");
+    await Promise.all(d.getAnimations().map((a) => a.finished));
+    d.close();
+    setOpen(false);
+  }
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,61 +82,132 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="grid gap-5">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Row id="name" label="Name" error={errors.name}>
-          <input
-            id="name"
-            name="name"
-            autoComplete="name"
-            placeholder="Full name"
-            aria-invalid={!!errors.name}
-            aria-describedby="name-error"
-            className={input}
-          />
-        </Row>
-        <Row id="email" label="Email" error={errors.email}>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="name@company.com"
-            aria-invalid={!!errors.email}
-            aria-describedby="email-error"
-            className={input}
-          />
-        </Row>
+    <>
+      <div className="flex h-full flex-col justify-between gap-10 rounded-2xl border border-line bg-bg p-6 sm:p-8">
+        <div>
+          <p className="text-sm font-medium text-muted">What can I help with?</p>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {TYPES.map((t) => (
+              <li key={t}>
+                <button
+                  type="button"
+                  onClick={(e) => start(t, e)}
+                  className="rounded-full border border-line px-4 py-2 text-sm transition hover:border-fg hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-[0.98]"
+                >
+                  {t}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+          <p className="text-sm text-muted">Takes about 2 minutes.</p>
+          <button
+            type="button"
+            onClick={(e) => start(TYPES[0], e)}
+            className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium whitespace-nowrap text-accent-fg transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-[0.98]"
+          >
+            Start a project
+            <ArrowRightIcon
+              size={16}
+              weight="bold"
+              className="transition-transform group-hover:translate-x-0.5"
+            />
+          </button>
+        </div>
       </div>
 
-      <Row id="type" label="Inquiry type">
-        <Select id="type" name="type" options={TYPES} />
-      </Row>
-
-      <Row id="message" label="Message" error={errors.message}>
-        <textarea
-          id="message"
-          name="message"
-          rows={5}
-          placeholder="Tell me about the project, timeline, and budget range."
-          aria-invalid={!!errors.message}
-          aria-describedby="message-error"
-          className={`${input} resize-y`}
-        />
-      </Row>
-
-      <div className="flex flex-wrap items-center gap-4">
-        <button
-          type="submit"
-          className="inline-flex items-center rounded-full bg-accent px-6 py-3 text-sm font-medium whitespace-nowrap text-accent-fg transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-[0.98]"
+      {open && (
+        <dialog
+          ref={dialog}
+          aria-labelledby="contact-title"
+          onCancel={(e) => {
+            e.preventDefault();
+            close();
+          }}
+          style={{ "--x": `${origin.x}px`, "--y": `${origin.y}px` } as React.CSSProperties}
+          className="circle-in fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto bg-accent p-0 backdrop:bg-transparent"
         >
-          Send message
-        </button>
-        <p role="status" className="text-sm text-muted">
-          {sent && "Your email app will open with the message pre-filled."}
-        </p>
-      </div>
-    </form>
+          <button
+            type="button"
+            onClick={close}
+            aria-label="Close"
+            className="fixed top-5 right-5 z-10 grid size-12 place-items-center rounded-full bg-accent-fg/10 text-accent-fg transition hover:bg-accent-fg/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-fg active:scale-[0.95]"
+          >
+            <XIcon size={20} weight="bold" />
+          </button>
+          <div className="flex min-h-full items-center justify-center px-4 py-20">
+            <div
+              className="rise w-full max-w-2xl rounded-2xl bg-bg p-6 sm:p-10"
+              style={{ "--i": 3 } as React.CSSProperties}
+            >
+              <h2
+                id="contact-title"
+                className="text-2xl font-semibold tracking-tighter text-balance md:text-4xl"
+              >
+                Tell me about your project
+              </h2>
+              <p className="mt-3 mb-8 text-muted">I reply within one business day.</p>
+            <form onSubmit={onSubmit} noValidate className="grid gap-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Row id="name" label="Name" error={errors.name}>
+                  <input
+                    id="name"
+                    name="name"
+                    autoComplete="name"
+                    placeholder="Full name"
+                    aria-invalid={!!errors.name}
+                    aria-describedby="name-error"
+                    className={input}
+                  />
+                </Row>
+                <Row id="email" label="Email" error={errors.email}>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="name@company.com"
+                    aria-invalid={!!errors.email}
+                    aria-describedby="email-error"
+                    className={input}
+                  />
+                </Row>
+              </div>
+
+              <Row id="type" label="Inquiry type">
+                <Select id="type" name="type" options={TYPES} initial={type} />
+              </Row>
+
+              <Row id="message" label="Message" error={errors.message}>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  placeholder="Tell me about the project, timeline, and budget range."
+                  aria-invalid={!!errors.message}
+                  aria-describedby="message-error"
+                  className={`${input} resize-y`}
+                />
+              </Row>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  type="submit"
+                  className="inline-flex items-center rounded-full bg-accent px-6 py-3 text-sm font-medium whitespace-nowrap text-accent-fg transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-[0.98]"
+                >
+                  Send message
+                </button>
+                <p role="status" className="text-sm text-muted">
+                  {sent && "Your email app will open with the message pre-filled."}
+                </p>
+              </div>
+            </form>
+            </div>
+          </div>
+        </dialog>
+      )}
+    </>
   );
 }
 
@@ -113,12 +217,14 @@ function Select({
   id,
   name,
   options,
+  initial,
 }: {
   id: string;
   name: string;
   options: string[];
+  initial: string;
 }) {
-  const [value, setValue] = useState(options[0]);
+  const [value, setValue] = useState(initial);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const root = useRef<HTMLDivElement>(null);
