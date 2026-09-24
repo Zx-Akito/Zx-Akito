@@ -1,6 +1,6 @@
 import Image from "next/image";
 import {
-  ArrowDownIcon,
+  DownloadSimpleIcon,
   ArrowUpIcon,
   ArrowUpRightIcon,
   ChatCircleDotsIcon,
@@ -54,7 +54,7 @@ export default function Home() {
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bg/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line bg-bg/95">
       <nav className={`${wrap} flex h-20 items-center justify-between`}>
         <a href="#" className="flex items-center gap-3">
           <Image
@@ -122,9 +122,9 @@ function Hero() {
           {profile.summary}
         </p>
         <div className="rise mt-9 flex flex-wrap justify-center gap-3" style={d(3)}>
-          <a href="#projects" className={`${btn} bg-fg text-bg hover:opacity-85`}>
-            View projects
-            <ArrowDownIcon size={16} weight="bold" />
+          <a href={profile.cv} className={`${btn} bg-fg text-bg hover:opacity-85`}>
+            Download CV
+            <DownloadSimpleIcon size={16} weight="bold" />
           </a>
           <a href="#contact" className={`${btn} bg-surface hover:bg-line`}>
             <ChatCircleDotsIcon size={18} weight="fill" className="text-sky-500" />

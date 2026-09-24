@@ -68,6 +68,7 @@ a:has(img) {
 
   .marquee {
     animation: marquee 30s linear infinite;
+    will-change: transform;
   }
 
   .marquee-slow {
