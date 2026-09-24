@@ -18,8 +18,6 @@ export const profile = {
 };
 
 export const about = {
-  statement:
-    "I focus on performance, security, and scalability, from 360° panorama desktop apps to cross-platform games.",
   body: "Since 2023 I have worked as a Software Engineer at GoThru Media Indonesia, building desktop, mobile, and Unity applications. I use Claude and Codex for refactoring and architecture optimization. I am also currently pursuing a Bachelor's degree in Informatics Engineering at Universitas Terbuka.",
   stats: [
     { value: "3+", label: "Years in the industry" },
@@ -28,14 +26,16 @@ export const about = {
   ],
 };
 
+// Card backgrounds: Unsplash photos (free license), unsplash.com/s/photos/foggy-mountains
 export const projects = [
   {
-    title: "Naruto Senki",
+    title: "Naruto Senki (火影战记)",
     year: "2026",
     category: "Game",
     desc: "Competitive 3v3 MOBA-style tower defense game with real-time login and leaderboards, for macOS, Windows, Android, and iOS.",
     tags: ["Cocos2d-x", "C++", "Convex", "WebSocket"],
     image: "/narsen.png",
+    bg: "/projects/bg-1.webp",
     href: "https://narutosenki.my.id",
   },
   {
@@ -45,6 +45,7 @@ export const projects = [
     desc: "Cross-platform anime streaming app with authentication, real-time data, and push notifications.",
     tags: ["Next.js", "Zustand", "Convex", "FCM"],
     image: "/stucknime.png",
+    bg: "/projects/bg-2.webp",
     href: "https://stucknime.my.id",
   },
   {
@@ -54,6 +55,7 @@ export const projects = [
     desc: "360° panorama photo file manager with AI-powered editing for automatic nadir removal and furniture placement.",
     tags: ["Tauri", "Rust", "React", "TypeScript"],
     image: "/photostudio.png",
+    bg: "/projects/bg-3.webp",
     href: "https://gothru.co/gothru-photo-studio.html",
   },
   {
@@ -63,16 +65,8 @@ export const projects = [
     desc: "360° panorama viewer with support for Google Street View, Cardboard, and Meta Quest.",
     tags: ["Unity", "C#", "WebView"],
     image: "/navigator.png",
+    bg: "/projects/bg-4.webp",
     href: "https://gothruvr.com/",
-  },
-  {
-    title: "Dunia Hewan",
-    year: "2024",
-    category: "Educational game",
-    desc: "Interactive learning game that teaches kids about animals, with drag-and-drop and scoring, for Android and iOS.",
-    tags: ["Unity", "SQLite", "Xcode"],
-    image: "/duniahewan.png",
-    href: "#",
   },
 ];
 

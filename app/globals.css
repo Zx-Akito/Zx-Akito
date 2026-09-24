@@ -23,13 +23,21 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background: var(--bg);
   color: var(--fg);
+}
+
+/* No image dragging. -webkit-user-drag covers Chrome/Safari (and links wrapping images);
+   pointer-events covers Firefox. Clicks still reach the parent link. */
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
+img,
+a:has(img) {
+  -webkit-user-drag: none;
 }
 
 ::selection {
@@ -58,6 +66,18 @@ body {
     transform: none;
   }
 
+  .marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .marquee-slow {
+    animation-duration: 60s;
+  }
+
+  .marquee-right {
+    animation-direction: reverse;
+  }
+
   .pop {
     animation: pop 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
     transform-origin: top;
@@ -75,5 +95,11 @@ body {
   from {
     opacity: 0;
     transform: translateY(20px);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
 }
