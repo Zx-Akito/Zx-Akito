@@ -100,7 +100,10 @@ function Hero() {
             style={d(0)}
           >
             {/* Dot = real availability status */}
-            <span className="size-2 rounded-full bg-green-600" />
+            <span className="relative flex size-2">
+              <span className="absolute inset-0 rounded-full bg-green-600 opacity-75 motion-safe:animate-ping" />
+              <span className="relative size-2 rounded-full bg-green-600" />
+            </span>
             {profile.role} · Open to new projects
           </p>
         )}

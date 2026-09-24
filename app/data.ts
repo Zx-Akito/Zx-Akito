@@ -1,7 +1,7 @@
 // All website content lives here. Compiled from the CV.
 
 export const profile = {
-  name: "Rifki Nurmansyah Ependi",
+  name: "Rifki Nurmansyah",
   role: "Software Engineer",
   // [highlighted, rest of line 1, line 2]
   headline: ["Software engineer", "for web,", "mobile, desktop, and games."],
