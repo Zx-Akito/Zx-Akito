@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="218 207 800 800">
+  <!-- Traced from the supplied Z artwork; light tile keeps it visible on dark tab bars -->
+  <rect x="218" y="207" width="800" height="800" rx="184" fill="#fafafa"/>
+  <path d="M470 432h342L555 715h296l-66 67H385l262-284H405z" fill="#18181b"/>
+</svg>
