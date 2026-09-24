@@ -56,7 +56,7 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/95">
       <nav className={`${wrap} flex h-20 items-center justify-between`}>
-        <a href="#" className="flex items-center gap-3">
+        <a href="#top" className="flex items-center gap-3">
           <Image
             src={profile.portrait}
             alt=""
@@ -510,7 +510,7 @@ function Footer() {
           © {new Date().getFullYear()} {profile.name}
         </p>
         <a
-          href="#"
+          href="#top"
           className="inline-flex items-center gap-2 transition hover:text-fg"
         >
           Back to top
