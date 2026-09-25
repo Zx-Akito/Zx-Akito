@@ -52,8 +52,11 @@ Responsive landing pages with Handlebars and Bootstrap.
 ## GitHub stats
 
 <p>
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=Zx-Akito&show_icons=true&hide_border=true&theme=transparent" alt="GitHub stats"/>
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Zx-Akito&layout=compact&hide_border=true&theme=transparent" alt="Top languages"/>
+  <img height="165" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Zx-Akito&theme=github" alt="GitHub stats"/>
+  <img height="165" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Zx-Akito&theme=github" alt="Top languages"/>
+</p>
+<p>
+  <img src="https://streak-stats.demolab.com?user=Zx-Akito&hide_border=true" alt="GitHub streak"/>
 </p>
 
 ---
